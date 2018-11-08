@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ArchivePictures", "ArchivePictures\ArchivePictures.fsproj", "{597370EC-0214-438C-991E-D2B69997E5F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{597370EC-0214-438C-991E-D2B69997E5F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{597370EC-0214-438C-991E-D2B69997E5F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{597370EC-0214-438C-991E-D2B69997E5F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{597370EC-0214-438C-991E-D2B69997E5F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {276C36F0-D744-48A2-9CCE-F42E292B3DB2}
+	EndGlobalSection
+EndGlobal
