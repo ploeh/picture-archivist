@@ -6,7 +6,9 @@ let movePictures source destination =
     let pictures =
         Directory.EnumerateFiles (source, "*.jpg", SearchOption.AllDirectories)
         |> Seq.map (fun s -> { FullPath = s; Name = Path.GetFileName s})
-        |> Seq.map (fun f -> { File = f; TakenOn = DateTimeOffset(2018, 11, 8, 9, 51, 10, TimeSpan.FromHours 1.) })
+        |> Seq.choose (fun f ->
+            Photo.extractDateTaken (FileInfo f.FullPath)
+            |> Option.map (fun dt -> { File = f; TakenOn = DateTimeOffset(dt, TimeSpan.Zero) }))
     FileMover.move (FileSystem.FileSystemOperations ()) destination pictures
     |> Seq.iter id
 
