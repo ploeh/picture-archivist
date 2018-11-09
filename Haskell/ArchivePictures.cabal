@@ -18,13 +18,18 @@ executable archpics
   main-is:             Main.hs
   default-language:    Haskell2010
   build-depends:       base >= 4.7 && < 5
+                     , containers
+                     , time
                      , filepath
                      , hsexif
 
 library
   hs-source-dirs:      src
   exposed-modules:     Tree
+                     , Archive
   build-depends:       base >= 4.7 && < 5
+                     , containers
+                     , time
                      , filepath
   ghc-options:         -Wall
   default-language:    Haskell2010
@@ -34,8 +39,10 @@ test-suite ArchivePictures-test
   hs-source-dirs:      test
   main-is:             Spec.hs
   other-modules:       TreeTest
+                     , ArchiveTest
   build-depends:       ArchivePictures
                      , base
+                     , time
                      , filepath
                      , test-framework
                      , test-framework-hunit
