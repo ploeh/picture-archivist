@@ -55,6 +55,25 @@ archiveTests =
           ]
         let actual = moveTo destination source
         return $ expected ~=? actual
+      ,
+      "Calculate moves" ~: do
+        (tree, expected) <-
+          [
+            (Leaf "1", Leaf $ Move "1" "1"),
+            (Node "a" [Leaf "1"], Node "a" [Leaf $ Move "1" $ "a" </> "1"]),
+            (Node "a" [Leaf "1", Leaf "2"], Node "a" [
+              Leaf $ Move "1" $ "a" </> "1",
+              Leaf $ Move "2" $ "a" </> "2"]),
+            (Node "a" [Node "b" [Leaf "1", Leaf "2"], Node "c" [Leaf "3"]],
+             Node "a" [
+               Node ("a" </> "b") [
+                 Leaf $ Move "1" $ "a" </> "b" </> "1",
+                 Leaf $ Move "2" $ "a" </> "b" </> "2"],
+               Node ("a" </> "c") [
+                 Leaf $ Move "3" $ "a" </> "c" </> "3"]])
+          ]
+        let actual = calculateMoves tree
+        return $ expected ~=? actual
     ]
   ]
 
