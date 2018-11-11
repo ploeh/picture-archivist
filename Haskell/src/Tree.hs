@@ -12,9 +12,11 @@ foldTree :: (a -> [c] -> c) -> (b -> c) -> Tree a b -> c
 foldTree  _ fl (Leaf x) = fl x
 foldTree fn fl (Node x xs) = fn x $ foldTree fn fl <$> xs
 
+catMaybeTree :: Tree a (Maybe b) -> Maybe (Tree a b)
+catMaybeTree = foldTree (\x -> Just . Node x . catMaybes) (fmap Leaf)
+
 filterTree :: (b -> Bool) -> Tree a b -> Maybe (Tree a b)
-filterTree p =
-  foldTree (\x -> Just . Node x . catMaybes) (fmap Leaf . mfilter p . Just)
+filterTree p = catMaybeTree . fmap (mfilter p . Just)
 
 instance Bifunctor Tree where
   bimap f s = foldTree (Node . f) (Leaf . s)
