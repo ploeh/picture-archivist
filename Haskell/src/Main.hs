@@ -6,6 +6,8 @@ import System.FilePath
 import qualified Data.ByteString as B
 import Graphics.HsExif
 import Data.Foldable
+import Control.Monad.Trans.Class
+import Control.Monad.Trans.Maybe
 import Tree
 import Archive
 
@@ -17,11 +19,11 @@ main = do
     _ -> putStrLn "Please provide source and destination directories as arguments."
 
 movePhotos :: FilePath -> FilePath -> IO ()
-movePhotos source destination = do
-  t <- readTree source
-  photoTree <- catMaybeTree <$> traverse readPhoto t
-  let destTree = calculateMoves <$> moveTo destination <$> photoTree
-  traverse_ applyMoves destTree
+movePhotos source destination = fmap fold $ runMaybeT $ do
+  sourceTree <- lift $ readTree source
+  photoTree <- MaybeT $ catMaybeTree <$> traverse readPhoto sourceTree
+  let destinationTree = calculateMoves $ moveTo destination photoTree
+  lift $ applyMoves destinationTree
 
 readTree :: FilePath -> IO (Tree FilePath FilePath)
 readTree path = do

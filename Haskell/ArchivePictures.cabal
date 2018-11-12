@@ -22,6 +22,7 @@ executable archpics
   build-depends:       base >= 4.7 && < 5
                      , directory
                      , containers
+                     , transformers
                      , time
                      , filepath
                      , bytestring
