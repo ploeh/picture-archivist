@@ -24,6 +24,7 @@ executable archpics
                      , containers
                      , time
                      , filepath
+                     , bytestring
                      , hsexif
 
 library

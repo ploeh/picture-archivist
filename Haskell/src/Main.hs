@@ -3,6 +3,7 @@ module Main where
 import System.Environment
 import System.Directory
 import System.FilePath
+import qualified Data.ByteString as B
 import Graphics.HsExif
 import Data.Foldable
 import Tree
@@ -40,8 +41,16 @@ readPhoto path = do
   return $ PhotoFile path <$> dateTaken
 
 applyMoves :: Foldable t => t Move -> IO ()
-applyMoves = traverse_ cp
+applyMoves = traverse_ move
   where
-    cp (Move s d) = do
+    move m = copy m >> compareFiles m >>= deleteSource
+    copy (Move s d) = do
       createDirectoryIfMissing True $ takeDirectory d
       copyFileWithMetadata s d
+      putStrLn $ "Copied to " ++ show d
+    compareFiles m@(Move s d) = do
+      sourceBytes <- B.readFile s
+      destinationBytes <- B.readFile d
+      return $ if sourceBytes == destinationBytes then Just m else Nothing
+    deleteSource           Nothing = return ()
+    deleteSource (Just (Move s _)) = removeFile s
