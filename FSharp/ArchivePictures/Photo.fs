@@ -31,9 +31,13 @@ let extractDateTaken (fi : FileInfo) =
             Some (Encoding.ASCII.GetString(pi.Value, 0, pi.Len - 1))
         else None
 
-    use photo = Image.FromFile fi.FullName
+    try
+        use photo = Image.FromFile fi.FullName
 
-    [ exifDateTimeOriginal; exifDateTaken ]
-    |> Seq.choose (extractExif photo)
-    |> Seq.tryHead
-    |> Option.bind tryParseDate
+        [ exifDateTimeOriginal; exifDateTaken ]
+        |> Seq.choose (extractExif photo)
+        |> Seq.tryHead
+        |> Option.bind tryParseDate
+    with
+        | :? OutOfMemoryException -> None
+        | :? FileNotFoundException -> None

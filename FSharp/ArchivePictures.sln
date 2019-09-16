@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ArchivePictures", "ArchivePictures\ArchivePictures.fsproj", "{597370EC-0214-438C-991E-D2B69997E5F7}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ArchivePictures.UnitTests", "ArchivePictures.UnitTests\ArchivePictures.UnitTests.fsproj", "{B0DC8A76-EEF9-45CA-81A8-9B9F98984259}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{597370EC-0214-438C-991E-D2B69997E5F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{597370EC-0214-438C-991E-D2B69997E5F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{597370EC-0214-438C-991E-D2B69997E5F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0DC8A76-EEF9-45CA-81A8-9B9F98984259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0DC8A76-EEF9-45CA-81A8-9B9F98984259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0DC8A76-EEF9-45CA-81A8-9B9F98984259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0DC8A76-EEF9-45CA-81A8-9B9F98984259}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
