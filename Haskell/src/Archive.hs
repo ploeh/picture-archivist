@@ -25,6 +25,7 @@ moveTo destination =
     addDir name files dirs = Node name (Leaf <$> files) : dirs
 
 calculateMoves :: Tree FilePath FilePath -> Tree FilePath Move
-calculateMoves = imp ""
-  where imp path    (Leaf x) = Leaf $ Move x $ replaceDirectory x path
-        imp path (Node x xs) = Node (path </> x) $ imp (path </> x) <$> xs
+calculateMoves t = foldTree fNode fLeaf t ""
+  where
+    fLeaf x    path = Leaf $ Move x $ replaceDirectory x path
+    fNode x fs path = Node (path </> x) $ ($ path </> x) <$> fs
