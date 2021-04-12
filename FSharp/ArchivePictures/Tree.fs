@@ -7,9 +7,11 @@ module Tree =
     
     let node x xs = Node (x, xs)
 
-    let rec cata fd ff = function
-        | Leaf x -> ff x
-        | Node (x, xs) -> xs |> List.map (cata fd ff) |> fd x
+    let cata fd ff =
+        let rec loop = function
+            | Leaf x -> ff x
+            | Node (x, xs) -> xs |> List.map loop |> fd x
+        loop
 
     let choose f =
         cata (fun x -> List.choose id >> node x >> Some) (f >> Option.map Leaf)
